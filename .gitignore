@@ -1,0 +1,22 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# Distribution/build directories
+build/
+dist/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+.ipynb_checkpoints/
+
+# Generated indexes
+bm25_index.pkl
+chroma_db/
