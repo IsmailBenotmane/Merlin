@@ -1,0 +1,33 @@
+# Core RAG and Document Processing
+langchain==0.1.0
+langchain-community==0.0.13
+langchain-openai==0.0.2
+pypdf==3.17.4
+pymupdf==1.23.26
+python-docx==1.1.0
+
+# Vector Store and Embeddings
+chromadb==0.4.22
+sentence-transformers==2.2.2
+openai==1.7.2
+
+# Search and Retrieval
+rank-bm25==0.2.2
+scikit-learn==1.4.0
+numpy==1.26.3
+
+# Text Processing and Chunking
+tiktoken==0.5.2
+spacy==3.7.2
+nltk==3.8.1
+
+# Utilities and Data Handling
+python-dotenv==1.0.0
+pandas==2.2.0
+tqdm==4.66.1
+typing-extensions==4.9.0
+
+# Optional but recommended for development
+jupyter==1.0.0
+matplotlib==3.8.2
+streamlit==1.30.0 
