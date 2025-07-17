@@ -1,6 +1,6 @@
 # Merlin Retrieval-Augmented Generation System
 
-Merlin is a retrieval-augmented generation (RAG) framework focused on HEC Master in International Finance (MiF) documents. It parses PDFs, splits them into indexed chunks and offers both semantic and keyword search. Optionally it can use the OpenAI API to generate conversational answers based on the retrieved passages.
+Merlin (**M**iF **E**mbedding & **R**etrievaL eng**IN**e) is a retrieval-augmented generation (RAG) framework focused on HEC Master in International Finance (MiF) documents. It parses PDFs, splits them into indexed chunks and offers both semantic and keyword search. Optionally it can use the OpenAI API to generate conversational answers based on the retrieved passages.
 
 ## Key Concepts
 
