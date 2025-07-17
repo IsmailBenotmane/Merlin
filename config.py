@@ -9,10 +9,11 @@ load_dotenv()
 
 class Config:
     # OpenAI Configuration
-    # To enable conversational AI responses, set your OpenAI API key here:
-    # Option 1: Set environment variable: export OPENAI_API_KEY="your-api-key-here"
-    # Option 2: Replace the placeholder below with your actual API key
-    OPENAI_API_KEY = "sk-your-api-key"
+    # To enable conversational AI responses, provide your OpenAI API key:
+    # Option 1: export OPENAI_API_KEY="your-api-key"
+    # Option 2: leave the environment variable unset and replace the value below
+    # The default "sk-your-api-key" acts as a placeholder and will trigger local mode
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "sk-your-api-key")
     USE_OPENAI_EMBEDDINGS = True  # Will fallback to local if API key not available
     EMBEDDING_MODEL = "text-embedding-3-small"
     

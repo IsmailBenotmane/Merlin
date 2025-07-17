@@ -31,7 +31,7 @@ Merlin is a retrieval-augmented generation (RAG) framework focused on Master in 
 pip install -r requirements.txt
 ```
 
-Set `OPENAI_API_KEY` in the environment or edit `Config.OPENAI_API_KEY` in `config.py` to enable OpenAI embeddings and conversational mode. A placeholder key is included in the repository—replace it with your own. To force local embeddings only, set `USE_OPENAI_EMBEDDINGS = False`.
+Set `OPENAI_API_KEY` in the environment or edit `Config.OPENAI_API_KEY` in `config.py` to enable OpenAI embeddings and conversational mode. If the variable is unset, the default value "sk-your-api-key" is treated as a placeholder and local mode will be used. To force local embeddings only, set `USE_OPENAI_EMBEDDINGS = False`.
 
 ## Running the System
 
