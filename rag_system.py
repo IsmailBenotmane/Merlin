@@ -25,7 +25,10 @@ class ConversationalRAG:
         self.api_key = api_key or Config.OPENAI_API_KEY
         self.client = None
         
-        if self.api_key and self.api_key.strip() and not self.api_key.startswith('your-'):
+        if (self.api_key
+                and self.api_key.strip()
+                and self.api_key != "sk-your-api-key"
+                and not self.api_key.startswith('your-')):
             try:
                 self.client = OpenAI(api_key=self.api_key)
                 logger.info("OpenAI client initialized for conversational responses")
