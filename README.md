@@ -35,7 +35,7 @@ Set `OPENAI_API_KEY` in the environment or edit `Config.OPENAI_API_KEY` in `conf
 
 ## Running the System
 
-Place your PDF documents in `./Documents` and launch:
+PDF documents are available in the HEC Intranet. Place them in `./Documents` and launch:
 
 ```bash
 python rag_system.py
