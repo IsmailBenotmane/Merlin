@@ -829,6 +829,7 @@ def main():
         
     except Exception as e:
         print(f"Error setting up RAG system: {e}")
+        
         logger.error(f"RAG system error: {e}")
 
 if __name__ == "__main__":
