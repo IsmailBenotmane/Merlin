@@ -12,7 +12,7 @@ class Config:
     # To enable conversational AI responses, set your OpenAI API key here:
     # Option 1: Set environment variable: export OPENAI_API_KEY="your-api-key-here"
     # Option 2: Replace the placeholder below with your actual API key
-    OPENAI_API_KEY = "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"
+    OPENAI_API_KEY = "sk-your-api-key"
     USE_OPENAI_EMBEDDINGS = True  # Will fallback to local if API key not available
     EMBEDDING_MODEL = "text-embedding-3-small"
     
