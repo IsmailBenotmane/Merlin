@@ -473,30 +473,30 @@ class RAGQueryInterface:
     def interactive_query(self):
         """Start interactive query session"""
         print("\n" + "="*60)
-        print("🎓 MIF RAG System - Ask me anything about the MIF program!")
+        print("MIF RAG System - Ask me anything about the MIF program!")
         print("="*60)
-        print(f"📚 I have access to information from 5 MIF documents")
-        print(f"💡 Ready to answer your questions! ({self.rag.total_chunks} sections indexed)")
-        print("\n🔮 Examples of what you can ask:")
+        print("I have access to information from 5 MIF documents")
+        print(f"Ready to answer your questions! ({self.rag.total_chunks} sections indexed)")
+        print("\nExamples of what you can ask:")
         print("   • What are the admission requirements for MIF?")
         print("   • How long is the program and what does it cost?")
         print("   • What career opportunities are available after graduation?")
         print("   • What courses are included in the curriculum?")
         print("   • What is the employment rate and salary expectations?")
         print("   • Who are the faculty members teaching in the program?")
-        print("\n📝 Just type your question naturally! (or 'help' for advanced options, 'quit' to exit)")
+        print("\nJust type your question naturally! (or 'help' for advanced options, 'quit' to exit)")
         print("="*60)
         
         while True:
             try:
-                user_input = input("\n❓ Your question: ").strip()
+                user_input = input("\nYour question: ").strip()
                 
                 if not user_input:
-                    print("💬 Please ask me something about the MIF program!")
+                    print("Please ask me something about the MIF program!")
                     continue
                 
                 if user_input.lower() in ['quit', 'exit', 'q']:
-                    print("👋 Thank you for using the MIF RAG System! Goodbye!")
+                    print("Thank you for using the MIF RAG System! Goodbye!")
                     break
                 
                 # Check for special commands
@@ -514,16 +514,16 @@ class RAGQueryInterface:
                     self._answer_question(user_input)
                 
             except KeyboardInterrupt:
-                print("\n👋 Thank you for using the MIF RAG System! Goodbye!")
+                print("\nThank you for using the MIF RAG System! Goodbye!")
                 break
             except Exception as e:
-                print(f"❌ I encountered an error: {e}")
-                print("💡 Please try rephrasing your question or type 'help' for assistance")
+                print(f"I encountered an error: {e}")
+                print("Please try rephrasing your question or type 'help' for assistance")
                 logger.error(f"Query interface error: {e}")
     
     def _answer_question(self, question: str):
         """Answer a natural question using conversational AI with retrieved information"""
-        print(f"\n🔍 Searching for information about: '{question}'")
+        print(f"\nSearching for information about: '{question}'")
         
         start_time = time.time()
         # Use hybrid search to get relevant chunks
@@ -540,40 +540,40 @@ class RAGQueryInterface:
         })
         
         if not results:
-            print("❌ I couldn't find specific information about that topic in the MIF documents.")
-            print("💡 Try rephrasing your question or asking about:")
+            print("I couldn't find specific information about that topic in the MIF documents.")
+            print("Try rephrasing your question or asking about:")
             print("   • Admission requirements • Program structure • Career outcomes")
             print("   • Course curriculum • Faculty • Application process")
             return
         
-        print(f"✅ Found relevant information! ({search_time:.2f}s)")
+        print(f"Found relevant information! ({search_time:.2f}s)")
         
         # Generate conversational response using OpenAI
-        print("\n🤖 Generating comprehensive response...")
+        print("\nGenerating comprehensive response...")
         response_start = time.time()
         ai_result = self.conversational_rag.generate_response(question, results)
         response_time = time.time() - response_start
         
         if ai_result['has_openai_response'] and ai_result['response']:
             # Display AI-generated response
-            print(f"\n💬 **Response** (generated in {response_time:.2f}s):")
+            print(f"\nResponse (generated in {response_time:.2f}s):")
             print("="*60)
             print(ai_result['response'])
             print("="*60)
             
             # Show sources used
-            print(f"\n📚 **Sources** ({len(ai_result['sources'])} documents):")
+            print(f"\nSources ({len(ai_result['sources'])} documents):")
             for source in ai_result['sources'][:3]:  # Show top 3 sources
-                print(f"   📄 Source {source['number']}: {source['source']} (Page {source['page']})")
-                print(f"      🎯 Relevance: {source['relevance']:.1%}")
+                print(f"   Source {source['number']}: {source['source']} (Page {source['page']})")
+                print(f"      Relevance: {source['relevance']:.1%}")
                 if source['section'] and source['section'] != 'unknown':
-                    print(f"      📍 Section: {source['section']}")
+                    print(f"      Section: {source['section']}")
                 print()
             
         else:
             # Fallback to showing raw chunks if OpenAI fails
             error_msg = ai_result.get('error', 'OpenAI API not available')
-            print(f"\n⚠️  AI response unavailable ({error_msg}). Showing source information:")
+            print(f"\nAI response unavailable ({error_msg}). Showing source information:")
             
             # Format results in a user-friendly way  
             for i, result in enumerate(results[:3], 1):
@@ -585,12 +585,12 @@ class RAGQueryInterface:
                 # Make source name more readable
                 source_display = source.replace('(1).pdf', '').replace('_', ' ').title()
                 
-                print(f"📄 **Source {i}**: {source_display}")
+                print(f"Source {i}: {source_display}")
                 if section and section != 'unknown':
-                    print(f"📍 **Section**: {section}")
-                print(f"📖 **Page**: {page}")
-                print(f"🎯 **Relevance**: {result.hybrid_score:.1%}")
-                print(f"💬 **Content**:")
+                    print(f"Section: {section}")
+                print(f"Page: {page}")
+                print(f"Relevance: {result.hybrid_score:.1%}")
+                print(f"Content:")
                 
                 # Format content nicely
                 content = chunk.text.strip()
@@ -605,7 +605,7 @@ class RAGQueryInterface:
                 print()  # Add space between results
         
         # Add helpful follow-up suggestions
-        print("💡 **Need more details?** You can ask follow-up questions like:")
+        print("Need more details? You can ask follow-up questions like:")
         if "admission" in question.lower():
             print("   • 'What documents do I need for application?'")
             print("   • 'What are the language requirements?'")
@@ -633,7 +633,7 @@ class RAGQueryInterface:
                 filter_preset, query = parts
                 self._execute_filtered_search(query, filter_preset)
             else:
-                print("❌ Usage: filter:<preset> <question>")
+                print("Usage: filter:<preset> <question>")
                 print("Available presets: academic, career, presentation")
         elif command.startswith('analyze:'):
             query = command[8:].strip()
@@ -642,25 +642,25 @@ class RAGQueryInterface:
     def _show_help(self):
         """Show help information"""
         print("\n" + "="*50)
-        print("📚 **MIF RAG System Help**")
+        print("MIF RAG System Help")
         print("="*50)
-        print("🎯 **Main Usage**: Just ask your question naturally!")
+        print("Main Usage: Just ask your question naturally!")
         print("   Example: 'What are the admission requirements?'")
         print()
-        print("🔧 **Commands**:")
+        print("Commands:")
         print("   help     - Show this help")
         print("   status   - Show system information")
         print("   history  - Show your recent questions")
         print("   quit     - Exit the system")
         print()
-        print("⚡ **Advanced (for power users)**:")
+        print("Advanced (for power users):")
         print("   semantic:<question>  - Use semantic search only")
         print("   keyword:<question>   - Use keyword search only")
         print("   filter:<preset> <question> - Search specific document types")
         print("     • academic, career, presentation presets available")
         print("   analyze:<question>   - Compare different search methods")
         print()
-        print("💡 **Tips**:")
+        print("Tips:")
         print("   • Ask specific questions for better results")
         print("   • Use natural language - no special commands needed")
         print("   • Follow up with related questions to dive deeper")
@@ -765,20 +765,20 @@ class RAGQueryInterface:
         status = self.rag.get_system_status()
         
         print("\n" + "="*40)
-        print("📊 **System Status**")
+        print("System Status")
         print("="*40)
-        print(f"🟢 **Status**: {'Ready' if status['is_indexed'] else 'Not Ready'}")
-        print(f"📚 **Documents**: {status['total_chunks']} sections indexed")
-        print(f"📁 **Source**: {status['documents_path']}")
-        print(f"🤖 **AI Model**: {status['config']['embedding_model']}")
-        print(f"📏 **Chunk Size**: {status['config']['chunk_size']} characters")
-        print(f"⚖️ **Search Balance**: {status['config']['hybrid_alpha']:.1%} semantic")
+        print(f"Status: {'Ready' if status['is_indexed'] else 'Not Ready'}")
+        print(f"Documents: {status['total_chunks']} sections indexed")
+        print(f"Source: {status['documents_path']}")
+        print(f"AI Model: {status['config']['embedding_model']}")
+        print(f"Chunk Size: {status['config']['chunk_size']} characters")
+        print(f"Search Balance: {status['config']['hybrid_alpha']:.1%} semantic")
         
         if 'vector_store_stats' in status:
             vs_stats = status['vector_store_stats']
             doc_types = vs_stats.get('document_types', {})
             if doc_types:
-                print(f"📋 **Document Types**:")
+                print(f"Document Types:")
                 for doc_type, count in doc_types.items():
                     print(f"   • {doc_type.title()}: {count}")
         print("="*40)
@@ -786,17 +786,17 @@ class RAGQueryInterface:
     def _show_history(self):
         """Show query history"""
         if not self.session_history:
-            print("\n📝 No questions asked yet in this session.")
-            print("💡 Try asking something like 'What are the admission requirements?'")
+            print("\nNo questions asked yet in this session.")
+            print("Try asking something like 'What are the admission requirements?'")
             return
         
         print("\n" + "="*50)
-        print("📝 **Your Recent Questions**")
+        print("Your Recent Questions")
         print("="*50)
         
         for i, entry in enumerate(self.session_history[-5:], 1):  # Show last 5
-            results_emoji = "✅" if entry['results_count'] > 0 else "❌"
-            print(f"{i}. {results_emoji} '{entry['query']}'")
+            results_marker = "OK" if entry['results_count'] > 0 else "X"
+            print(f"{i}. {results_marker} '{entry['query']}'")
             print(f"   └─ {entry['results_count']} results in {entry['search_time']:.2f}s")
             print()
         
