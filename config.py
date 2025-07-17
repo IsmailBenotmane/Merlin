@@ -48,4 +48,4 @@ class Config:
         "section",
         "chunk_index",
         "total_chunks"
-    ] 
+    ]
