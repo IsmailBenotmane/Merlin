@@ -1,6 +1,17 @@
 # Merlin Retrieval-Augmented Generation System
 
-Merlin is a retrieval-augmented generation (RAG) framework focused on Master in International Finance (MiF) documents. It parses PDFs, produces searchable text chunks and provides both semantic and keyword search with optional conversational answers via the OpenAI API.
+Merlin is a retrieval-augmented generation (RAG) framework focused on Master in International Finance (MiF) documents. It parses PDFs, splits them into indexed chunks and offers both semantic and keyword search. Optionally it can use the OpenAI API to generate conversational answers based on the retrieved passages.
+
+## Key Concepts
+
+- **Retrieval-Augmented Generation** – combine document retrieval with a language model to answer questions using your own corpus.
+- **Document Chunks** – extracted pieces of text with metadata such as page, document type and section.
+- **Semantic Search** – compares vector embeddings of queries and chunks using OpenAI or a local model.
+- **Keyword Search** – traditional BM25 scoring of plain text.
+- **Hybrid Search** – weighted fusion of semantic and keyword scores.
+- **Metadata Filters** – restrict results by attributes like document type or page number.
+- **Vector Store** – ChromaDB database storing embeddings for fast similarity search.
+- **Conversational Mode** – optional chat layer that reformulates follow-up questions.
 
 ## Repository Overview
 
@@ -20,7 +31,7 @@ Merlin is a retrieval-augmented generation (RAG) framework focused on Master in 
 pip install -r requirements.txt
 ```
 
-Set `OPENAI_API_KEY` in the environment or in a `.env` file to enable OpenAI embeddings and conversational mode. Without a key the system falls back to local embeddings and displays raw search results.
+Set `OPENAI_API_KEY` in the environment or edit `Config.OPENAI_API_KEY` in `config.py` to enable OpenAI embeddings and conversational mode. A placeholder key is included in the repository—replace it with your own. To force local embeddings only, set `USE_OPENAI_EMBEDDINGS = False`.
 
 ## Running the System
 
